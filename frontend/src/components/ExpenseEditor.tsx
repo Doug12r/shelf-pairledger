@@ -106,29 +106,29 @@ export default function ExpenseEditor({
   ];
 
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="animate-fadeIn max-w-lg mx-auto">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-bold text-gray-100">
+        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">
           {expense ? "Edit Expense" : "Add Expense"}
         </h2>
         <button
           onClick={onCancel}
-          className="text-sm text-gray-500 hover:text-gray-300"
+          className="text-sm text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 apple-button font-medium"
         >
           Cancel
         </button>
       </div>
 
       {error && (
-        <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+        <div className="text-red-500 text-sm mb-4 p-3 rounded-xl bg-red-50 dark:bg-red-900/20">
           {error}
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className="apple-card rounded-2xl shadow-md p-6 card-enter space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Amount</label>
+            <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Amount</label>
             <input
               type="number"
               step="0.01"
@@ -136,37 +136,37 @@ export default function ExpenseEditor({
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="0.00"
-              className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-gray-200 focus:outline-none focus:border-gray-600"
+              className="modern-input w-full"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Date</label>
+            <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Date</label>
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-gray-200 focus:outline-none focus:border-gray-600"
+              className="modern-input w-full"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Description</label>
+          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Description</label>
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="What was this for?"
-            className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-gray-200 focus:outline-none focus:border-gray-600"
+            className="modern-input w-full"
           />
         </div>
 
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Category</label>
+          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Category</label>
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-gray-200 focus:outline-none focus:border-gray-600"
+            className="modern-input w-full"
           >
             <option value="">No category</option>
             {categories.map((c) => (
@@ -178,17 +178,17 @@ export default function ExpenseEditor({
         </div>
 
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Split Type</label>
+          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Split Type</label>
           <div className="flex gap-2">
             {splitOptions.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => setSplitType(opt.value)}
-                className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={
                   splitType === opt.value
-                    ? "bg-sky-600 text-white"
-                    : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                }`}
+                    ? "bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full px-4 py-2 text-sm font-medium apple-button shadow-sm flex-1"
+                    : "apple-card rounded-full px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 apple-button shadow-sm flex-1"
+                }
               >
                 {opt.label}
               </button>
@@ -197,26 +197,26 @@ export default function ExpenseEditor({
         </div>
 
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Paid By</label>
+          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Paid By</label>
           <div className="flex gap-2">
             <button
               onClick={() => setPaidBy(currentUserId)}
-              className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={
                 paidBy === currentUserId
-                  ? "bg-sky-600 text-white"
-                  : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-              }`}
+                  ? "bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full px-4 py-2 text-sm font-medium apple-button shadow-sm flex-1"
+                  : "apple-card rounded-full px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 apple-button shadow-sm flex-1"
+              }
             >
               Me
             </button>
             {household.user_b_id && household.user_b_id !== currentUserId && (
               <button
                 onClick={() => setPaidBy(household.user_b_id!)}
-                className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={
                   paidBy === household.user_b_id
-                    ? "bg-sky-600 text-white"
-                    : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                }`}
+                    ? "bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full px-4 py-2 text-sm font-medium apple-button shadow-sm flex-1"
+                    : "apple-card rounded-full px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 apple-button shadow-sm flex-1"
+                }
               >
                 Partner
               </button>
@@ -224,11 +224,11 @@ export default function ExpenseEditor({
             {household.user_a_id !== currentUserId && (
               <button
                 onClick={() => setPaidBy(household.user_a_id)}
-                className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={
                   paidBy === household.user_a_id
-                    ? "bg-sky-600 text-white"
-                    : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                }`}
+                    ? "bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full px-4 py-2 text-sm font-medium apple-button shadow-sm flex-1"
+                    : "apple-card rounded-full px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 apple-button shadow-sm flex-1"
+                }
               >
                 Partner
               </button>
@@ -237,25 +237,25 @@ export default function ExpenseEditor({
         </div>
 
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Notes</label>
+          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Notes</label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={2}
-            className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-gray-200 focus:outline-none focus:border-gray-600"
+            className="modern-input w-full"
           />
         </div>
 
         <div>
-          <label className="block text-sm text-gray-400 mb-1">
-            Tags <span className="text-gray-600">(comma separated)</span>
+          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">
+            Tags <span className="text-slate-400 dark:text-slate-500">(comma separated)</span>
           </label>
           <input
             type="text"
             value={tagsStr}
             onChange={(e) => setTagsStr(e.target.value)}
             placeholder="groceries, monthly"
-            className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-gray-200 focus:outline-none focus:border-gray-600"
+            className="modern-input w-full"
           />
         </div>
 
@@ -263,7 +263,7 @@ export default function ExpenseEditor({
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex-1 px-4 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white font-medium transition-colors"
+            className="flex-1 bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-3 rounded-xl font-semibold apple-button shadow-sm disabled:opacity-50"
           >
             {saving ? "Saving..." : expense ? "Update" : "Add Expense"}
           </button>
@@ -271,7 +271,7 @@ export default function ExpenseEditor({
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="px-4 py-2.5 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-400 font-medium transition-colors"
+              className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl px-4 py-2.5 text-sm font-medium apple-button"
             >
               {deleting ? "..." : "Delete"}
             </button>

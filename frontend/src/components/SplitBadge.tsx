@@ -1,9 +1,9 @@
 import type { SplitType } from "../types";
 
 const config: Record<SplitType, { label: string; cls: string }> = {
-  shared: { label: "Shared", cls: "bg-blue-500/20 text-blue-400" },
-  personal: { label: "Personal", cls: "bg-amber-500/20 text-amber-400" },
-  equal: { label: "50/50", cls: "bg-emerald-500/20 text-emerald-400" },
+  shared: { label: "Shared", cls: "bg-sky-50 dark:bg-sky-900/20 text-sky-600 dark:text-sky-400" },
+  personal: { label: "Personal", cls: "bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400" },
+  equal: { label: "50/50", cls: "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400" },
 };
 
 export default function SplitBadge({ type }: { type: SplitType }) {

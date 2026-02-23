@@ -75,13 +75,13 @@ export default function CategoryManager({ categories, onUpdated }: Props) {
   };
 
   return (
-    <div>
+    <div className="animate-fadeIn">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-100">Categories</h2>
+        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">Categories</h2>
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition-colors"
+            className="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-3 rounded-xl font-semibold apple-button shadow-sm"
           >
             + Add Category
           </button>
@@ -89,49 +89,49 @@ export default function CategoryManager({ categories, onUpdated }: Props) {
       </div>
 
       {showForm && (
-        <div className="mb-6 p-4 rounded-lg bg-gray-900 border border-gray-800">
-          <h3 className="text-sm font-medium text-gray-300 mb-3">
+        <div className="apple-card rounded-2xl shadow-md p-6 card-enter mb-6">
+          <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-3">
             {editId ? "Edit Category" : "New Category"}
           </h3>
           {error && (
-            <div className="mb-3 p-2 rounded bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+            <div className="text-red-500 text-sm mb-4 p-3 rounded-xl bg-red-50 dark:bg-red-900/20">
               {error}
             </div>
           )}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Name</label>
+              <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Name</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+                className="modern-input w-full"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Icon (emoji)</label>
+              <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Icon (emoji)</label>
               <input
                 type="text"
                 value={icon}
                 onChange={(e) => setIcon(e.target.value)}
-                placeholder="e.g. 🛒"
-                className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+                placeholder="e.g. \uD83D\uDED2"
+                className="modern-input w-full"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Color</label>
+              <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Color</label>
               <div className="flex items-center gap-2">
                 <input
                   type="color"
                   value={color}
                   onChange={(e) => setColor(e.target.value)}
-                  className="w-8 h-8 rounded border border-gray-700 bg-transparent cursor-pointer"
+                  className="w-8 h-8 rounded-lg border border-slate-200 dark:border-white/10 bg-transparent cursor-pointer"
                 />
-                <span className="text-sm text-gray-400">{color}</span>
+                <span className="text-sm text-slate-500 dark:text-slate-400">{color}</span>
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Monthly Budget</label>
+              <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Monthly Budget</label>
               <input
                 type="number"
                 step="0.01"
@@ -139,21 +139,21 @@ export default function CategoryManager({ categories, onUpdated }: Props) {
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
                 placeholder="Optional"
-                className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+                className="modern-input w-full"
               />
             </div>
           </div>
-          <div className="flex gap-2 mt-3">
+          <div className="flex gap-2 mt-4">
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white text-sm font-medium transition-colors"
+              className="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-3 rounded-xl font-semibold apple-button shadow-sm disabled:opacity-50"
             >
               {saving ? "Saving..." : editId ? "Update" : "Create"}
             </button>
             <button
               onClick={resetForm}
-              className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 text-sm transition-colors"
+              className="apple-card rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 apple-button shadow-sm"
             >
               Cancel
             </button>
@@ -162,15 +162,17 @@ export default function CategoryManager({ categories, onUpdated }: Props) {
       )}
 
       {categories.length === 0 ? (
-        <p className="text-gray-500 text-sm text-center py-8">
-          No categories yet. Add one to organize your expenses.
-        </p>
+        <div className="apple-card rounded-2xl shadow-md p-12 text-center card-enter">
+          <p className="text-slate-500 dark:text-slate-400 text-sm">
+            No categories yet. Add one to organize your expenses.
+          </p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {categories.map((c) => (
             <div
               key={c.id}
-              className="flex items-center justify-between p-3 rounded-lg bg-gray-900 border border-gray-800"
+              className="apple-card rounded-2xl shadow-md p-4 card-enter flex items-center justify-between"
             >
               <div className="flex items-center gap-2 min-w-0">
                 {c.color && (
@@ -180,9 +182,9 @@ export default function CategoryManager({ categories, onUpdated }: Props) {
                   />
                 )}
                 <span className="text-base">{c.icon || ""}</span>
-                <span className="text-sm text-gray-200 truncate">{c.name}</span>
+                <span className="text-sm text-gray-800 dark:text-gray-100 truncate">{c.name}</span>
                 {c.budget_monthly != null && (
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
                     ${c.budget_monthly}/mo
                   </span>
                 )}
@@ -190,13 +192,13 @@ export default function CategoryManager({ categories, onUpdated }: Props) {
               <div className="flex gap-1 shrink-0">
                 <button
                   onClick={() => startEdit(c)}
-                  className="text-xs px-2 py-1 rounded bg-gray-800 text-gray-400 hover:bg-gray-700 transition-colors"
+                  className="apple-card rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 apple-button shadow-sm"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(c.id)}
-                  className="text-xs px-2 py-1 rounded bg-gray-800 text-red-400 hover:bg-gray-700 transition-colors"
+                  className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl px-4 py-2.5 text-sm font-medium apple-button"
                 >
                   Del
                 </button>

@@ -18,15 +18,15 @@ export default function StatsView() {
   const maxTrend = Math.max(...trends.map((t) => t.total), 1);
 
   return (
-    <div className="space-y-8">
+    <div className="animate-fadeIn space-y-8">
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-gray-100">Spending Stats</h2>
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">Spending Stats</h2>
           <div className="flex gap-2">
             <select
               value={month}
               onChange={(e) => setMonth(Number(e.target.value))}
-              className="rounded-lg bg-gray-800 border border-gray-700 px-3 py-1.5 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+              className="modern-input"
             >
               {Array.from({ length: 12 }, (_, i) => (
                 <option key={i + 1} value={i + 1}>
@@ -38,32 +38,34 @@ export default function StatsView() {
               type="number"
               value={year}
               onChange={(e) => setYear(Number(e.target.value))}
-              className="w-20 rounded-lg bg-gray-800 border border-gray-700 px-3 py-1.5 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+              className="modern-input w-20"
             />
           </div>
         </div>
 
         {/* Category breakdown */}
-        <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
-          <h3 className="text-sm font-medium text-gray-400 mb-3">By Category</h3>
+        <div className="apple-card rounded-2xl shadow-md p-4 card-enter">
+          <h3 className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-3 block">By Category</h3>
           {catStats.length === 0 ? (
-            <p className="text-gray-500 text-sm text-center py-4">
-              No spending data for this period.
-            </p>
+            <div className="text-center py-4">
+              <p className="text-slate-500 dark:text-slate-400 text-sm">
+                No spending data for this period.
+              </p>
+            </div>
           ) : (
             <div className="space-y-3">
               {catStats.map((c) => (
                 <div key={c.category_id ?? "none"}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-300">{c.category_name}</span>
+                    <span className="text-gray-800 dark:text-gray-100">{c.category_name}</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-200 tabular-nums font-medium">
+                      <span className="text-sky-600 dark:text-sky-400 tabular-nums font-medium">
                         ${c.total.toFixed(2)}
                       </span>
                       {c.budget != null && (
                         <span
                           className={`text-xs ${
-                            c.total > c.budget ? "text-red-400" : "text-gray-500"
+                            c.total > c.budget ? "text-red-500" : "text-slate-500 dark:text-slate-400"
                           }`}
                         >
                           / ${c.budget.toFixed(0)}
@@ -71,11 +73,11 @@ export default function StatsView() {
                       )}
                     </div>
                   </div>
-                  <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="h-2 bg-slate-200 dark:bg-gray-800 rounded-full overflow-hidden">
                     {c.budget != null ? (
                       <div
                         className={`h-full rounded-full ${
-                          c.total > c.budget ? "bg-red-500" : "bg-sky-500"
+                          c.total > c.budget ? "bg-red-500" : "bg-gradient-to-r from-sky-500 to-sky-600"
                         }`}
                         style={{
                           width: `${Math.min(100, (c.total / c.budget) * 100)}%`,
@@ -83,14 +85,14 @@ export default function StatsView() {
                       />
                     ) : (
                       <div
-                        className="h-full bg-sky-500 rounded-full"
+                        className="h-full bg-gradient-to-r from-sky-500 to-sky-600 rounded-full"
                         style={{
                           width: `${(c.total / maxCatTotal) * 100}%`,
                         }}
                       />
                     )}
                   </div>
-                  <span className="text-xs text-gray-600">
+                  <span className="text-xs text-slate-400 dark:text-slate-500">
                     {c.count} expense{c.count !== 1 ? "s" : ""}
                   </span>
                 </div>
@@ -101,23 +103,25 @@ export default function StatsView() {
       </div>
 
       {/* Monthly trends */}
-      <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
-        <h3 className="text-sm font-medium text-gray-400 mb-3">Monthly Trends</h3>
+      <div className="apple-card rounded-2xl shadow-md p-4 card-enter">
+        <h3 className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-3 block">Monthly Trends</h3>
         {trends.length === 0 ? (
-          <p className="text-gray-500 text-sm text-center py-4">No trend data yet.</p>
+          <div className="text-center py-4">
+            <p className="text-slate-500 dark:text-slate-400 text-sm">No trend data yet.</p>
+          </div>
         ) : (
           <div className="space-y-2">
             {trends.map((t) => (
               <div key={t.month}>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">{t.month}</span>
-                  <span className="text-gray-200 tabular-nums">
+                  <span className="text-slate-500 dark:text-slate-400">{t.month}</span>
+                  <span className="text-gray-800 dark:text-gray-100 tabular-nums">
                     ${t.total.toFixed(2)}
                   </span>
                 </div>
-                <div className="flex h-3 bg-gray-800 rounded-full overflow-hidden">
+                <div className="flex h-3 bg-slate-200 dark:bg-gray-800 rounded-full overflow-hidden">
                   <div
-                    className="bg-blue-500 h-full"
+                    className="bg-sky-500 h-full"
                     style={{ width: `${(t.shared / maxTrend) * 100}%` }}
                     title={`Shared: $${t.shared.toFixed(2)}`}
                   />
@@ -138,16 +142,16 @@ export default function StatsView() {
             ))}
             <div className="flex gap-4 pt-2">
               <div className="flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-blue-500" />
-                <span className="text-xs text-gray-500">Shared</span>
+                <div className="w-2 h-2 rounded-full bg-sky-500" />
+                <span className="text-xs text-slate-500 dark:text-slate-400">Shared</span>
               </div>
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 rounded-full bg-amber-500" />
-                <span className="text-xs text-gray-500">Personal</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">Personal</span>
               </div>
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span className="text-xs text-gray-500">Equal</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">Equal</span>
               </div>
             </div>
           </div>

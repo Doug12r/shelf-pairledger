@@ -46,7 +46,7 @@ export default function Dashboard({
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="animate-fadeIn space-y-6">
       {/* Search */}
       <SearchBar onSelect={(id) => {
         api.getExpense(id).then(onSelectExpense).catch(() => {});
@@ -61,25 +61,25 @@ export default function Dashboard({
             currentUserId={currentUserId}
           />
         )}
-        <div className="rounded-xl bg-gray-900 border border-gray-800 p-6">
-          <h3 className="text-sm font-medium text-gray-400 mb-3">This Month</h3>
-          <p className="text-3xl font-bold tabular-nums text-gray-100">
+        <div className="apple-card rounded-2xl shadow-md p-6 card-enter">
+          <h3 className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-3 block">This Month</h3>
+          <p className="text-3xl font-bold tabular-nums text-gray-800 dark:text-gray-100">
             ${monthTotal.toFixed(2)}
           </p>
           {ratio && household.user_b_id && (
             <div className="mt-3 flex items-center gap-1">
-              <span className="text-xs text-gray-500">Split ratio:</span>
-              <span className="text-xs text-sky-400 tabular-nums">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Split ratio:</span>
+              <span className="text-xs text-sky-600 dark:text-sky-400 tabular-nums">
                 {(ratio.user_a_ratio * 100).toFixed(0)}
               </span>
-              <span className="text-xs text-gray-600">/</span>
-              <span className="text-xs text-emerald-400 tabular-nums">
+              <span className="text-xs text-slate-400 dark:text-slate-500">/</span>
+              <span className="text-xs text-emerald-500 dark:text-emerald-400 tabular-nums">
                 {(ratio.user_b_ratio * 100).toFixed(0)}
               </span>
             </div>
           )}
           {!household.user_b_id && (
-            <p className="text-xs text-gray-500 mt-3">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-3">
               Invite your partner to start splitting expenses.
             </p>
           )}
@@ -88,11 +88,11 @@ export default function Dashboard({
 
       {/* Invite code */}
       {!household.user_b_id && household.invite_code && (
-        <div className="rounded-xl bg-sky-500/10 border border-sky-500/30 p-4">
-          <p className="text-sm text-sky-300">
+        <div className="apple-card rounded-2xl shadow-md p-4 card-enter border border-sky-200 dark:border-sky-500/30 bg-sky-50/80 dark:bg-sky-900/20">
+          <p className="text-sm text-sky-600 dark:text-sky-400">
             Share this invite code with your partner:
           </p>
-          <p className="text-xl font-mono font-bold text-sky-400 mt-1 tracking-wider">
+          <p className="text-xl font-mono font-bold text-sky-600 dark:text-sky-400 mt-1 tracking-wider">
             {household.invite_code}
           </p>
         </div>
@@ -101,26 +101,28 @@ export default function Dashboard({
       {/* Quick add + recent */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-medium text-gray-400">Recent Expenses</h3>
+          <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">Recent Expenses</h3>
           <div className="flex gap-2">
             <button
               onClick={onAddExpense}
-              className="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition-colors"
+              className="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-3 rounded-xl font-semibold apple-button shadow-sm"
             >
               + Add Expense
             </button>
             <button
               onClick={() => onNavigate("expenses")}
-              className="text-xs text-gray-500 hover:text-gray-300"
+              className="text-sm text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 apple-button font-medium"
             >
               View all
             </button>
           </div>
         </div>
         {recent.length === 0 ? (
-          <p className="text-gray-500 text-sm text-center py-6">
-            No expenses yet. Add your first expense to get started.
-          </p>
+          <div className="apple-card rounded-2xl shadow-md p-12 text-center card-enter">
+            <p className="text-slate-500 dark:text-slate-400 text-sm">
+              No expenses yet. Add your first expense to get started.
+            </p>
+          </div>
         ) : (
           <div className="flex flex-col gap-2">
             {recent.map((e) => (

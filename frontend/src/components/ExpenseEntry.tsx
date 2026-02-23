@@ -15,7 +15,7 @@ export default function ExpenseEntry({ expense, household, currentUserId, onClic
   return (
     <button
       onClick={onClick}
-      className="w-full text-left p-4 rounded-lg bg-gray-900 border border-gray-800 hover:border-gray-700 transition-colors"
+      className="w-full text-left apple-card rounded-2xl shadow-md p-4 card-enter apple-button"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
@@ -23,25 +23,25 @@ export default function ExpenseEntry({ expense, household, currentUserId, onClic
             {expense.category_icon && (
               <span className="text-base">{expense.category_icon}</span>
             )}
-            <span className="text-sm font-medium text-gray-200 truncate">
+            <span className="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">
               {expense.description}
             </span>
           </div>
           <div className="flex items-center gap-2 mt-1.5">
-            <span className="text-xs text-gray-500">{expense.date}</span>
-            <span className="text-xs text-gray-600">&middot;</span>
-            <span className={`text-xs ${isYou ? "text-sky-400" : "text-gray-400"}`}>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{expense.date}</span>
+            <span className="text-xs text-slate-400 dark:text-slate-500">&middot;</span>
+            <span className={`text-xs ${isYou ? "text-sky-600 dark:text-sky-400" : "text-slate-500 dark:text-slate-400"}`}>
               {isYou ? "You" : isUserA ? "Partner A" : "Partner B"}
             </span>
             <SplitBadge type={expense.split_type} />
           </div>
           {expense.category_name && (
-            <span className="text-xs text-gray-500 mt-1 inline-block">
+            <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 inline-block">
               {expense.category_name}
             </span>
           )}
         </div>
-        <span className="text-base font-semibold tabular-nums text-gray-100 shrink-0">
+        <span className="text-base font-semibold tabular-nums text-sky-600 dark:text-sky-400 shrink-0">
           ${expense.amount.toFixed(2)}
         </span>
       </div>
@@ -50,7 +50,7 @@ export default function ExpenseEntry({ expense, household, currentUserId, onClic
           {expense.tags.map((t) => (
             <span
               key={t}
-              className="text-xs px-1.5 py-0.5 rounded bg-gray-800 text-gray-400"
+              className="text-xs px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-900/20 text-sky-600 dark:text-sky-400"
             >
               {t}
             </span>

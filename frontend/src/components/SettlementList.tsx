@@ -85,13 +85,13 @@ export default function SettlementList({
   };
 
   return (
-    <div>
+    <div className="animate-fadeIn">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-100">Settlements</h2>
+        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">Settlements</h2>
         {partnerExists && absNet > 0.01 && !showForm && (
           <button
             onClick={startSettle}
-            className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition-colors"
+            className="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-3 rounded-xl font-semibold apple-button shadow-sm"
           >
             Settle Up (${absNet.toFixed(2)})
           </button>
@@ -99,53 +99,53 @@ export default function SettlementList({
       </div>
 
       {showForm && (
-        <div className="mb-6 p-4 rounded-lg bg-gray-900 border border-gray-800">
-          <h3 className="text-sm font-medium text-gray-300 mb-3">Record Settlement</h3>
-          <p className="text-xs text-gray-500 mb-3">
+        <div className="apple-card rounded-2xl shadow-md p-6 card-enter mb-6">
+          <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-3">Record Settlement</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
             {iOwe ? "You pay your partner" : "Your partner pays you"}
           </p>
           {error && (
-            <div className="mb-3 p-2 rounded bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+            <div className="text-red-500 text-sm mb-4 p-3 rounded-xl bg-red-50 dark:bg-red-900/20">
               {error}
             </div>
           )}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Amount</label>
+              <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Amount</label>
               <input
                 type="number"
                 step="0.01"
                 min="0"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+                className="modern-input w-full"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Date</label>
+              <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Date</label>
               <input
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+                className="modern-input w-full"
               />
             </div>
           </div>
           <div className="mt-3">
-            <label className="block text-xs text-gray-500 mb-1">Notes</label>
+            <label className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5 block">Notes</label>
             <input
               type="text"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Optional"
-              className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+              className="modern-input w-full"
             />
           </div>
-          <div className="flex gap-2 mt-3">
+          <div className="flex gap-2 mt-4">
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white text-sm font-medium transition-colors"
+              className="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-3 rounded-xl font-semibold apple-button shadow-sm disabled:opacity-50"
             >
               {saving ? "Saving..." : "Record Settlement"}
             </button>
@@ -154,7 +154,7 @@ export default function SettlementList({
                 setShowForm(false);
                 setError("");
               }}
-              className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 text-sm transition-colors"
+              className="apple-card rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 apple-button shadow-sm"
             >
               Cancel
             </button>
@@ -163,35 +163,37 @@ export default function SettlementList({
       )}
 
       {settlements.length === 0 ? (
-        <p className="text-gray-500 text-sm text-center py-8">
-          No settlements recorded yet.
-        </p>
+        <div className="apple-card rounded-2xl shadow-md p-12 text-center card-enter">
+          <p className="text-slate-500 dark:text-slate-400 text-sm">
+            No settlements recorded yet.
+          </p>
+        </div>
       ) : (
         <div className="space-y-2">
           {settlements.map((s) => (
             <div
               key={s.id}
-              className="flex items-center justify-between p-3 rounded-lg bg-gray-900 border border-gray-800"
+              className="apple-card rounded-2xl shadow-md p-4 card-enter flex items-center justify-between"
             >
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-emerald-400 tabular-nums">
+                  <span className="text-sm font-semibold text-sky-600 dark:text-sky-400 tabular-nums">
                     ${s.amount.toFixed(2)}
                   </span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
                     {s.from_user === currentUserId ? "You paid partner" : "Partner paid you"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-xs text-gray-500">{s.date}</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">{s.date}</span>
                   {s.notes && (
-                    <span className="text-xs text-gray-600">{s.notes}</span>
+                    <span className="text-xs text-slate-400 dark:text-slate-500">{s.notes}</span>
                   )}
                 </div>
               </div>
               <button
                 onClick={() => handleDelete(s.id)}
-                className="text-xs px-2 py-1 rounded bg-gray-800 text-red-400 hover:bg-gray-700 transition-colors"
+                className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl px-4 py-2.5 text-sm font-medium apple-button"
               >
                 Del
               </button>

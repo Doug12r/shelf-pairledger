@@ -55,12 +55,12 @@ export default function ExpenseList({
   const totalPages = Math.max(1, Math.ceil(total / perPage));
 
   return (
-    <div>
+    <div className="animate-fadeIn">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-100">Expenses</h2>
+        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">Expenses</h2>
         <button
           onClick={onAdd}
-          className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition-colors"
+          className="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-3 rounded-xl font-semibold apple-button shadow-sm"
         >
           + Add Expense
         </button>
@@ -75,7 +75,7 @@ export default function ExpenseList({
             setFilterMonth(e.target.value);
             setPage(1);
           }}
-          className="rounded-lg bg-gray-800 border border-gray-700 px-3 py-1.5 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+          className="modern-input"
         />
         <select
           value={filterCategory}
@@ -83,7 +83,7 @@ export default function ExpenseList({
             setFilterCategory(e.target.value);
             setPage(1);
           }}
-          className="rounded-lg bg-gray-800 border border-gray-700 px-3 py-1.5 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+          className="modern-input"
         >
           <option value="">All categories</option>
           {categories.map((c) => (
@@ -98,7 +98,7 @@ export default function ExpenseList({
             setFilterPayer(e.target.value);
             setPage(1);
           }}
-          className="rounded-lg bg-gray-800 border border-gray-700 px-3 py-1.5 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+          className="modern-input"
         >
           <option value="">All payers</option>
           <option value={currentUserId}>Me</option>
@@ -116,7 +116,7 @@ export default function ExpenseList({
             setFilterSplit(e.target.value);
             setPage(1);
           }}
-          className="rounded-lg bg-gray-800 border border-gray-700 px-3 py-1.5 text-sm text-gray-200 focus:outline-none focus:border-gray-600"
+          className="modern-input"
         >
           <option value="">All splits</option>
           <option value="shared">Shared</option>
@@ -126,11 +126,16 @@ export default function ExpenseList({
       </div>
 
       {loading ? (
-        <p className="text-gray-500 text-sm py-8 text-center">Loading...</p>
+        <div className="apple-card rounded-2xl shadow-md p-12 text-center card-enter">
+          <div className="w-6 h-6 border-2 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+          <p className="text-slate-500 dark:text-slate-400 text-sm">Loading...</p>
+        </div>
       ) : expenses.length === 0 ? (
-        <p className="text-gray-500 text-sm py-8 text-center">
-          No expenses found for this period.
-        </p>
+        <div className="apple-card rounded-2xl shadow-md p-12 text-center card-enter">
+          <p className="text-slate-500 dark:text-slate-400 text-sm">
+            No expenses found for this period.
+          </p>
+        </div>
       ) : (
         <>
           <div className="flex flex-col gap-2">
@@ -150,17 +155,17 @@ export default function ExpenseList({
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page <= 1}
-                className="px-3 py-1 rounded bg-gray-800 text-gray-400 text-sm disabled:opacity-30 hover:bg-gray-700 transition-colors"
+                className="apple-card rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 apple-button shadow-sm disabled:opacity-30"
               >
                 Prev
               </button>
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-slate-500 dark:text-slate-400">
                 {page} / {totalPages}
               </span>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page >= totalPages}
-                className="px-3 py-1 rounded bg-gray-800 text-gray-400 text-sm disabled:opacity-30 hover:bg-gray-700 transition-colors"
+                className="apple-card rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 apple-button shadow-sm disabled:opacity-30"
               >
                 Next
               </button>

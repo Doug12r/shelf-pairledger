@@ -36,10 +36,10 @@ export default function SearchBar({ onSelect }: Props) {
         onFocus={() => results.length > 0 && setOpen(true)}
         onBlur={() => setTimeout(() => setOpen(false), 200)}
         placeholder="Search expenses..."
-        className="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-gray-600"
+        className="modern-input w-full"
       />
       {open && results.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-50 max-h-72 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-1 apple-card rounded-2xl shadow-lg z-50 max-h-72 overflow-y-auto border border-slate-200/60 dark:border-white/10">
           {results.map((r) => (
             <button
               key={r.id}
@@ -49,15 +49,15 @@ export default function SearchBar({ onSelect }: Props) {
                 setQuery("");
                 setResults([]);
               }}
-              className="w-full text-left px-3 py-2 hover:bg-gray-700 transition-colors border-b border-gray-700/50 last:border-b-0"
+              className="w-full text-left px-4 py-3 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-colors border-b border-slate-100 dark:border-white/5 last:border-b-0 apple-button"
             >
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-200">{r.description}</span>
-                <span className="text-sm font-medium text-gray-300 tabular-nums">
+                <span className="text-sm text-gray-800 dark:text-gray-100">{r.description}</span>
+                <span className="text-sm font-medium text-sky-600 dark:text-sky-400 tabular-nums">
                   ${r.amount.toFixed(2)}
                 </span>
               </div>
-              <p className="text-xs text-gray-500 mt-0.5">{r.date}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{r.date}</p>
             </button>
           ))}
         </div>

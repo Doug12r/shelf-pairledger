@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import type { Household, Expense, Category, Balance, RecurringExpense } from "./types";
 import * as api from "./api";
+import { useToast } from "./hooks/useToast";
+import { ToastContainer } from "./components/Toast";
 import HouseholdSetup from "./components/HouseholdSetup";
 import Dashboard from "./components/Dashboard";
 import ExpenseList from "./components/ExpenseList";
@@ -31,6 +33,7 @@ export default function App() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [balance, setBalance] = useState<Balance | null>(null);
   const [view, setView] = useState<View>({ kind: "dashboard" });
+  const { toasts, showToast } = useToast();
 
   const loadHousehold = useCallback(async () => {
     try {
@@ -102,79 +105,91 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-        <p className="text-gray-500">Loading...</p>
+      <div className="min-h-screen bg-slate-50 dark:bg-gray-950 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Loading...</p>
+        </div>
       </div>
     );
   }
 
   if (!household) {
     return (
-      <div className="min-h-screen bg-gray-950 text-gray-100">
-        <div className="max-w-5xl mx-auto px-6 py-8">
+      <div className="min-h-screen bg-slate-50 dark:bg-gray-950">
+        <div className="max-w-lg mx-auto px-4 pb-32">
           <HouseholdSetup
             onDone={(h) => {
               setHousehold(h);
               setCurrentUserId(h.user_a_id);
+              showToast("Household ready!");
             }}
           />
         </div>
+        <ToastContainer toasts={toasts} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-5xl mx-auto px-6 py-8">
-        {/* Header */}
-        <header className="mb-8 flex items-start justify-between">
-          <div>
-            <h1
-              onClick={() => setView({ kind: "dashboard" })}
-              className="text-2xl font-bold text-gray-100 cursor-pointer hover:text-white transition-colors"
-            >
-              PairLedger
-            </h1>
-            <p className="text-sm text-gray-500 mt-0.5">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-950">
+      {/* Glassmorphism header */}
+      <header className="sticky top-0 z-40 apple-card border-b border-white/20 dark:border-white/5 backdrop-blur-xl">
+        <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
+          <div
+            onClick={() => setView({ kind: "dashboard" })}
+            className="cursor-pointer"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-sky-500 to-sky-600" />
+              <h1 className="text-lg font-bold text-gray-800 dark:text-gray-100">
+                PairLedger
+              </h1>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 ml-4">
               {household.name}
             </p>
           </div>
           <button
             onClick={() => api.exportData()}
-            className="text-xs px-3 py-1.5 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-colors"
+            className="apple-card rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 apple-button shadow-sm"
           >
-            Export Data
+            Export
           </button>
-        </header>
+        </div>
+      </header>
 
-        {/* Nav tabs */}
-        <nav className="flex gap-1 mb-6 border-b border-gray-800 pb-px overflow-x-auto">
+      {/* Pill tab navigation */}
+      <nav className="sticky top-[73px] z-30 bg-slate-50/80 dark:bg-gray-950/80 backdrop-blur-lg">
+        <div className="max-w-lg mx-auto px-4 py-2 flex gap-1.5 overflow-x-auto no-scrollbar">
           {(
             [
-              { id: "dashboard", label: "Dashboard" },
-              { id: "expenses", label: "Expenses" },
-              { id: "categories", label: "Categories" },
-              { id: "income", label: "Income" },
-              { id: "settlements", label: "Settlements" },
-              { id: "recurring", label: "Recurring" },
-              { id: "stats", label: "Stats" },
-            ] as { id: Tab; label: string }[]
+              { id: "dashboard", label: "Dashboard", icon: "\uD83D\uDCB0" },
+              { id: "expenses", label: "Expenses", icon: "\uD83D\uDCDD" },
+              { id: "income", label: "Income", icon: "\uD83D\uDCB5" },
+              { id: "recurring", label: "Recurring", icon: "\uD83D\uDD04" },
+              { id: "stats", label: "Stats", icon: "\uD83D\uDCCA" },
+              { id: "categories", label: "Categories", icon: "\u2699\uFE0F" },
+              { id: "settlements", label: "Settle", icon: "\u2705" },
+            ] as { id: Tab; label: string; icon: string }[]
           ).map((tab) => (
             <button
               key={tab.id}
               onClick={() => navigateTab(tab.id)}
-              className={`px-4 py-2 text-sm rounded-t-lg transition-colors whitespace-nowrap ${
+              className={
                 currentTab === tab.id
-                  ? "text-sky-400 border-b-2 border-sky-400 -mb-px"
-                  : "text-gray-500 hover:text-gray-300"
-              }`}
+                  ? "bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full px-4 py-2 text-sm font-medium apple-button shadow-sm whitespace-nowrap"
+                  : "apple-card rounded-full px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 apple-button shadow-sm whitespace-nowrap"
+              }
             >
-              {tab.label}
+              {tab.icon} {tab.label}
             </button>
           ))}
-        </nav>
+        </div>
+      </nav>
 
-        {/* Views */}
+      {/* Content */}
+      <main className="max-w-lg mx-auto px-4 pb-32 pt-4">
         {view.kind === "dashboard" && (
           <Dashboard
             household={household}
@@ -205,6 +220,7 @@ export default function App() {
             onSaved={() => {
               loadBalance();
               setView({ kind: "expenses" });
+              showToast("Expense added!");
             }}
             onCancel={() => setView({ kind: "expenses" })}
           />
@@ -219,11 +235,13 @@ export default function App() {
             onSaved={() => {
               loadBalance();
               setView({ kind: "expenses" });
+              showToast("Expense updated!");
             }}
             onCancel={() => setView({ kind: "expenses" })}
             onDeleted={() => {
               loadBalance();
               setView({ kind: "expenses" });
+              showToast("Expense deleted");
             }}
           />
         )}
@@ -263,7 +281,9 @@ export default function App() {
         )}
 
         {view.kind === "stats" && <StatsView />}
-      </div>
+      </main>
+
+      <ToastContainer toasts={toasts} />
     </div>
   );
 }
