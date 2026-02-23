@@ -1,0 +1,16 @@
+{
+  "id": "pairledger",
+  "name": "PairLedger",
+  "description": "Couples-aware household finance dashboard with income-proportional split tracking.",
+  "version": "1.0.0",
+  "icon": "\ud83d\udcb0",
+  "port": 3002,
+  "db_schema": "pairledger",
+  "path_prefix": "/pairledger",
+  "auth_required": true,
+  "partner_mode": true,
+  "env": [],
+  "optional_env": [],
+  "category": "personal-life",
+  "features": ["partner_mode", "charts"]
+}
