@@ -186,7 +186,7 @@ export default function ExpenseEditor({
                 onClick={() => setSplitType(opt.value)}
                 className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   splitType === opt.value
-                    ? "bg-indigo-600 text-white"
+                    ? "bg-sky-600 text-white"
                     : "bg-gray-800 text-gray-400 hover:bg-gray-700"
                 }`}
               >
@@ -203,7 +203,7 @@ export default function ExpenseEditor({
               onClick={() => setPaidBy(currentUserId)}
               className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 paidBy === currentUserId
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-sky-600 text-white"
                   : "bg-gray-800 text-gray-400 hover:bg-gray-700"
               }`}
             >
@@ -214,7 +214,7 @@ export default function ExpenseEditor({
                 onClick={() => setPaidBy(household.user_b_id!)}
                 className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   paidBy === household.user_b_id
-                    ? "bg-indigo-600 text-white"
+                    ? "bg-sky-600 text-white"
                     : "bg-gray-800 text-gray-400 hover:bg-gray-700"
                 }`}
               >
@@ -226,7 +226,7 @@ export default function ExpenseEditor({
                 onClick={() => setPaidBy(household.user_a_id)}
                 className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   paidBy === household.user_a_id
-                    ? "bg-indigo-600 text-white"
+                    ? "bg-sky-600 text-white"
                     : "bg-gray-800 text-gray-400 hover:bg-gray-700"
                 }`}
               >
@@ -263,7 +263,7 @@ export default function ExpenseEditor({
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex-1 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-medium transition-colors"
+            className="flex-1 px-4 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white font-medium transition-colors"
           >
             {saving ? "Saving..." : expense ? "Update" : "Add Expense"}
           </button>

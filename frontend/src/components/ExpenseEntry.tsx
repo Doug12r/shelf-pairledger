@@ -30,7 +30,7 @@ export default function ExpenseEntry({ expense, household, currentUserId, onClic
           <div className="flex items-center gap-2 mt-1.5">
             <span className="text-xs text-gray-500">{expense.date}</span>
             <span className="text-xs text-gray-600">&middot;</span>
-            <span className={`text-xs ${isYou ? "text-indigo-400" : "text-gray-400"}`}>
+            <span className={`text-xs ${isYou ? "text-sky-400" : "text-gray-400"}`}>
               {isYou ? "You" : isUserA ? "Partner A" : "Partner B"}
             </span>
             <SplitBadge type={expense.split_type} />

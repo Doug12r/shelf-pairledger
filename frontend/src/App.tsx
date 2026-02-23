@@ -165,7 +165,7 @@ export default function App() {
               onClick={() => navigateTab(tab.id)}
               className={`px-4 py-2 text-sm rounded-t-lg transition-colors whitespace-nowrap ${
                 currentTab === tab.id
-                  ? "text-indigo-400 border-b-2 border-indigo-400 -mb-px"
+                  ? "text-sky-400 border-b-2 border-sky-400 -mb-px"
                   : "text-gray-500 hover:text-gray-300"
               }`}
             >

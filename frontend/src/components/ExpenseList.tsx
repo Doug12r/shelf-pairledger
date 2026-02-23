@@ -60,7 +60,7 @@ export default function ExpenseList({
         <h2 className="text-lg font-bold text-gray-100">Expenses</h2>
         <button
           onClick={onAdd}
-          className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
+          className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition-colors"
         >
           + Add Expense
         </button>

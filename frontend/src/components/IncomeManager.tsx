@@ -73,7 +73,7 @@ export default function IncomeManager({ household, currentUserId }: Props) {
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
+            className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition-colors"
           >
             + Set Income
           </button>
@@ -96,7 +96,7 @@ export default function IncomeManager({ household, currentUserId }: Props) {
               </div>
               <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-indigo-500 rounded-full"
+                  className="h-full bg-sky-500 rounded-full"
                   style={{ width: `${ratio.user_a_ratio * 100}%` }}
                 />
               </div>
@@ -172,7 +172,7 @@ export default function IncomeManager({ household, currentUserId }: Props) {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium transition-colors"
+              className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white text-sm font-medium transition-colors"
             >
               {saving ? "Saving..." : "Save"}
             </button>

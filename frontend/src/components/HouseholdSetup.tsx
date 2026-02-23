@@ -49,7 +49,7 @@ export default function HouseholdSetup({ onDone }: Props) {
         <div className="flex flex-col gap-3">
           <button
             onClick={() => setMode("create")}
-            className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors"
+            className="px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-medium transition-colors"
           >
             Create a Household
           </button>
@@ -97,7 +97,7 @@ export default function HouseholdSetup({ onDone }: Props) {
           <button
             onClick={handleCreate}
             disabled={loading || !name.trim()}
-            className="w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-medium transition-colors"
+            className="w-full px-4 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white font-medium transition-colors"
           >
             {loading ? "Creating..." : "Create Household"}
           </button>
@@ -120,7 +120,7 @@ export default function HouseholdSetup({ onDone }: Props) {
           <button
             onClick={handleJoin}
             disabled={loading || !code.trim()}
-            className="w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-medium transition-colors"
+            className="w-full px-4 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white font-medium transition-colors"
           >
             {loading ? "Joining..." : "Join Household"}
           </button>

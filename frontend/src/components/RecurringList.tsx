@@ -129,7 +129,7 @@ export default function RecurringList({
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
+            className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition-colors"
           >
             + Add Template
           </button>
@@ -224,7 +224,7 @@ export default function RecurringList({
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium transition-colors"
+              className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white text-sm font-medium transition-colors"
             >
               {saving ? "Saving..." : editId ? "Update" : "Create"}
             </button>
@@ -282,7 +282,7 @@ export default function RecurringList({
               <div className="flex gap-1 mt-2">
                 <button
                   onClick={() => onUseTemplate(r)}
-                  className="text-xs px-2 py-1 rounded bg-indigo-600/20 text-indigo-400 hover:bg-indigo-600/30 transition-colors"
+                  className="text-xs px-2 py-1 rounded bg-sky-600/20 text-sky-400 hover:bg-sky-600/30 transition-colors"
                 >
                   Use Template
                 </button>

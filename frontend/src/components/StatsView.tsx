@@ -75,7 +75,7 @@ export default function StatsView() {
                     {c.budget != null ? (
                       <div
                         className={`h-full rounded-full ${
-                          c.total > c.budget ? "bg-red-500" : "bg-indigo-500"
+                          c.total > c.budget ? "bg-red-500" : "bg-sky-500"
                         }`}
                         style={{
                           width: `${Math.min(100, (c.total / c.budget) * 100)}%`,
@@ -83,7 +83,7 @@ export default function StatsView() {
                       />
                     ) : (
                       <div
-                        className="h-full bg-indigo-500 rounded-full"
+                        className="h-full bg-sky-500 rounded-full"
                         style={{
                           width: `${(c.total / maxCatTotal) * 100}%`,
                         }}

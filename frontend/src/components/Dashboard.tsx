@@ -69,7 +69,7 @@ export default function Dashboard({
           {ratio && household.user_b_id && (
             <div className="mt-3 flex items-center gap-1">
               <span className="text-xs text-gray-500">Split ratio:</span>
-              <span className="text-xs text-indigo-400 tabular-nums">
+              <span className="text-xs text-sky-400 tabular-nums">
                 {(ratio.user_a_ratio * 100).toFixed(0)}
               </span>
               <span className="text-xs text-gray-600">/</span>
@@ -88,11 +88,11 @@ export default function Dashboard({
 
       {/* Invite code */}
       {!household.user_b_id && household.invite_code && (
-        <div className="rounded-xl bg-indigo-500/10 border border-indigo-500/30 p-4">
-          <p className="text-sm text-indigo-300">
+        <div className="rounded-xl bg-sky-500/10 border border-sky-500/30 p-4">
+          <p className="text-sm text-sky-300">
             Share this invite code with your partner:
           </p>
-          <p className="text-xl font-mono font-bold text-indigo-400 mt-1 tracking-wider">
+          <p className="text-xl font-mono font-bold text-sky-400 mt-1 tracking-wider">
             {household.invite_code}
           </p>
         </div>
@@ -105,7 +105,7 @@ export default function Dashboard({
           <div className="flex gap-2">
             <button
               onClick={onAddExpense}
-              className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
+              className="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium transition-colors"
             >
               + Add Expense
             </button>
